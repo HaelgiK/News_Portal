@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
+
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -143,6 +144,18 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+EMAIL_HOST = 'smtp.mail.ru'  # адрес сервера Яндекс-почты для всех один и тот же
+EMAIL_PORT = 2525  # порт smtp сервера тоже одинаковый
+# имя пользователя, всё то что в почте до собаки
+EMAIL_HOST_USER = '...'
+EMAIL_HOST_PASSWORD = '...'  # пароль от почты
+# Яндекс использует ssl, включать его здесь обязательно
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = '...'
+
+SERVER_EMAIL = '...'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -166,3 +179,5 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # Верификация почты через подтверждение аккаунта
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_FORMS = {'signup': 'sign.forms.CommonSignupForm'}
+
+SITE_URL = 'http://127.0.0.1:8000'

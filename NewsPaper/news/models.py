@@ -28,6 +28,16 @@ class Author(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=100, unique=True)
+    # blank=True - поле может быть не обязательным и null=True - может быть нулевым
+    # related_name='categories' - Когда оперируем объектом User,
+    # то сможем с помощью поля user.categories.all обратиться ко всем категориям, на которые подписан пользователь
+    subscribers = models.ManyToManyField\
+        (
+            User,
+            blank=True,
+#            null=True,
+            related_name='categories'
+        )
 
     def __str__(self):
         return self.category_name

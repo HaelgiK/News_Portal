@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
-from .models import Post
+from .models import Post, Category
 from .filters import PostFilter
 from .forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -106,3 +107,64 @@ class ArticleDelete(PermissionRequiredMixin, DeleteView):
     model = Post
     template_name = 'article_delete.html'
     success_url = reverse_lazy('post_list')
+
+
+class CategoryListView(ListView):
+    model = Post
+    template_name = 'category_list.html'
+    context_object_name = 'category_news_list'
+
+    def get_queryset(self):
+        # Достаем из именованных аргументов (*kwargs) нашего представления наш 'pk'
+        self.category = get_object_or_404(Category, id=self.kwargs['pk'])
+        queryset = Post.objects.filter(post_category=self.category).order_by('-date_created')
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Достаем пользователя, который не входит в число подписчиков
+        # (обращаясь ко всем пользователям elf.category.subscribers.all())
+        context['is_not_subscriber'] = self.request.user not in self.category.subscribers.all()
+        # Передаем категорию в шаблон
+        context['category'] = self.category
+        return context
+
+
+@login_required
+def subscribe(request, pk):
+    # Получаем текущего пользователя
+    user = request.user
+    # Получаем текущую категорию
+    category = Category.objects.get(id=pk)
+    category.subscribers.add(user)
+    message = 'Вы подписались на категорию: '
+    return render(request, 'subscribe.html', {'category': category, 'message': message})
+
+
+@login_required
+def unsubscribe(request, pk):
+    user = request.user
+    category = Category.objects.get(id=pk)
+    category.subscribers.remove(user)
+    message = 'Вы отписались от категории: '
+    return render(request, 'subscribe.html', {'category': category, 'message': message})
+
+# class CategoryListView(ListView):
+#    model = Post
+#    ordering = '-id'
+#    template_name = 'category_list.html'
+#    #template_name = 'posts_of_cateory_list.html'
+#    #posts.html'
+#    context_object_name = 'category_news_list'
+#
+#    def get_queryset(self):
+#        self.queryset = Post.objects.get(pk=self.kwargs['pk']).post_category.all()
+#        return super().get_queryset()
+#
+# @login_required
+# def subscribe(request, pk):
+#     user = request.user
+#     category = Category.objects.get(id=pk)
+#     category.subscribers.add(user)
+#     message = 'Вы подписались на категорию: '
+#     return render(request, 'subscribe.html', {'category': category, 'message': message})
