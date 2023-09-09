@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,6 +54,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # ... include the providers you want to enable:
     'allauth.socialaccount.providers.google',
+    'django_apscheduler',
 ]
 
 SITE_ID = 1
@@ -144,17 +148,23 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-EMAIL_HOST = 'smtp.mail.ru'  # адрес сервера Яндекс-почты для всех один и тот же
-EMAIL_PORT = 2525  # порт smtp сервера тоже одинаковый
-# имя пользователя, всё то что в почте до собаки
-EMAIL_HOST_USER = '...'
-EMAIL_HOST_PASSWORD = '...'  # пароль от почты
+EMAIL_HOST = 'smtp.mail.ru' # адрес сервера Яндекс-почты для всех один и тот же
+#EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 2525 #465порт smtp сервера тоже одинаковый
+# имя пользователя, всё то EMAIL_HOST_USER = 'oleg18.09'что в почте до собаки
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
 # Яндекс использует ssl, включать его здесь обязательно
 EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = '...'
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+EMAIL_ADMIN = os.getenv('EMAIL_ADMIN')
+SERVER_EMAIL = os.getenv('SERVER_EMAIL')
 
-SERVER_EMAIL = '...'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -177,7 +187,25 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # Верификация почты через подтверждение аккаунта
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = True
 ACCOUNT_FORMS = {'signup': 'sign.forms.CommonSignupForm'}
 
 SITE_URL = 'http://127.0.0.1:8000'
+
+# формат даты, которую будет воспринимать наш задачник (вспоминаем модуль по фильтрам)
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+
+# если задача не выполняется за 25 секунд, то она автоматически снимается, можете поставить время побольше, но как правило, это сильно бьёт по производительности сервера
+APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
+
+# Указываем на URL брокера сообщений (Redis).
+# По умолчанию он находится на порту 6379
+CELERY_BROKER_URL = 'redis://localhost:6379'
+# указываем на хранилище результатов выполнения задач
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+# допустимый формат данных
+CELERY_ACCEPT_CONTENT = ['application/json']
+# метод сериализации задач
+CELERY_TASK_SERIALIZER = 'json'
+# метод сериализации результатов
+CELERY_RESULT_SERIALIZER = 'json'

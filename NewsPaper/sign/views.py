@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, Group
+from news.models import Author
 from django.views.generic.edit import CreateView
 from .models import BaseRegisterForm
 from django.contrib.auth.decorators import login_required
@@ -15,4 +16,5 @@ def upgrade_me(request):
     authors_group = Group.objects.get(name='authors')
     if not request.user.groups.filter(name='authors').exists():
         authors_group.user_set.add(user)
+        Author.objects.create(authorUser=user)
     return redirect('/')
