@@ -66,6 +66,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -77,6 +78,10 @@ MIDDLEWARE = [
 
 
 ROOT_URLCONF = 'config.urls'
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale')
+]
 
 TEMPLATES = [
     {
@@ -308,27 +313,22 @@ LOGGING = {
         },
         'django.request': {
             'handlers': ['file_errors', 'mail_admins'],
-            'level': 'ERROR',
             'propagate': True,
         },
         'django.server': {
             'handlers': ['file_errors', 'mail_admins'],
-            'level': 'ERROR',
             'propagate': True,
         },
         'django.template': {
             'handlers': ['file_errors'],
-            'level': 'ERROR',
             'propagate': True,
         },
         'django.db.backends': {
             'handlers': ['file_errors'],
-            'level': 'ERROR',
             'propagate': True,
         },
         'django.security': {
             'handlers': ['file_security'],
-            'level': 'INFO',
             'propagate': True,
         }
     }

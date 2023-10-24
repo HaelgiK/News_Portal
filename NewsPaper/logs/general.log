@@ -1,0 +1,43 @@
+2023-10-20 15:55:38,947 INFO autoreload Watching for file changes with StatReloader
+2023-10-20 15:59:23,776 INFO basehttp "GET /sign/login/ HTTP/1.1" 200 914
+2023-10-20 15:59:34,799 INFO basehttp "POST /sign/login/ HTTP/1.1" 302 0
+2023-10-20 15:59:34,820 INFO basehttp "GET / HTTP/1.1" 200 505
+2023-10-20 15:59:50,884 INFO basehttp "GET /sign/logout/ HTTP/1.1" 200 242
+2023-10-20 15:59:55,043 WARNING log Not Found: /sign/l
+2023-10-20 15:59:55,043 WARNING basehttp "GET /sign/l HTTP/1.1" 404 179
+2023-10-20 15:59:58,369 WARNING log Not Found: /sign/
+2023-10-20 15:59:58,370 WARNING basehttp "GET /sign/ HTTP/1.1" 404 179
+2023-10-20 16:00:50,166 INFO autoreload Watching for file changes with StatReloader
+2023-10-20 16:00:58,864 INFO basehttp "GET / HTTP/1.1" 302 0
+2023-10-20 16:00:58,914 INFO basehttp "GET /accounts/login/?next=/ HTTP/1.1" 200 1568
+2023-10-20 16:01:05,325 INFO basehttp "GET /accounts/signup/?next=%2F HTTP/1.1" 200 1195
+2023-10-20 16:01:30,209 INFO basehttp "GET /accounts/login/?next=%2F HTTP/1.1" 200 1568
+2023-10-20 16:01:48,062 INFO basehttp "POST /accounts/login/ HTTP/1.1" 200 1710
+2023-10-20 16:02:06,291 INFO basehttp "POST /accounts/login/ HTTP/1.1" 200 1710
+2023-10-20 16:02:16,431 INFO basehttp "GET /sign/login/ HTTP/1.1" 200 914
+2023-10-20 16:02:27,774 INFO basehttp "POST /sign/login/ HTTP/1.1" 302 0
+2023-10-20 16:02:27,799 INFO basehttp "GET / HTTP/1.1" 200 567
+2023-10-20 16:02:40,045 WARNING log Forbidden (Permission denied): /news/1/edit/
+Traceback (most recent call last):
+  File "C:\Users\okond\PycharmProjects\DjangoProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\okond\PycharmProjects\DjangoProject\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\okond\PycharmProjects\DjangoProject\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\okond\PycharmProjects\DjangoProject\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\okond\PycharmProjects\DjangoProject\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 108, in dispatch
+    return self.handle_no_permission()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\okond\PycharmProjects\DjangoProject\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 48, in handle_no_permission
+    raise PermissionDenied(self.get_permission_denied_message())
+django.core.exceptions.PermissionDenied
+2023-10-20 16:02:40,057 WARNING basehttp "GET /news/1/edit/ HTTP/1.1" 403 135
+2023-10-20 16:14:23,151 INFO autoreload Watching for file changes with StatReloader
+2023-10-20 16:21:28,147 INFO autoreload C:\Users\okond\PycharmProjects\DjangoProject\NewsPaper\news\models.py changed, reloading.
+2023-10-20 16:21:28,760 INFO autoreload Watching for file changes with StatReloader
