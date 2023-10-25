@@ -1,0 +1,3 @@
+{"message": "Watching for file changes with StatReloader", "timestamp": "2023-10-25T11:16:20.002830Z", "level": "INFO"}
+{"message": "\"GET /news/ HTTP/1.1\" 200 4889", "request": "<socket.socket fd=700, family=2, type=1, proto=0, laddr=('127.0.0.1', 8000), raddr=('127.0.0.1', 58696)>", "server_time": "25/Oct/2023 13:16:21", "status_code": 200, "timestamp": "2023-10-25T11:16:21.919305Z", "level": "INFO"}
+{"message": "\"GET /news/ HTTP/1.1\" 200 4889", "request": "<socket.socket fd=700, family=2, type=1, proto=0, laddr=('127.0.0.1', 8000), raddr=('127.0.0.1', 58696)>", "server_time": "25/Oct/2023 13:16:22", "status_code": 200, "timestamp": "2023-10-25T11:16:22.378963Z", "level": "INFO"}

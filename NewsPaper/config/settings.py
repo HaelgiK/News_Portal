@@ -17,6 +17,7 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 import logging
+from config.logging_formaters import CustomJsonFormatter
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +32,7 @@ logger = logging.getLogger(__name__)
 SECRET_KEY = 'django-insecure-3hj-&9n1u1piaa%54orox@#@!31cumhiq+&ay-f+#&$qz*g!=t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -164,6 +165,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+ADMINS = (
+    ('adminKO', 'oleg18.09@mail.ru'),
+)
 EMAIL_HOST = 'smtp.mail.ru' # адрес сервера Яндекс-почты для всех один и тот же
 #EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 2525 #465порт smtp сервера тоже одинаковый
@@ -247,6 +251,9 @@ LOGGING = {
         'mail_form': {
             'format': '%(asctime)s %(levelname)s %(message)s %(pathname)s'
         },
+        'json_formatter': {
+            '()': CustomJsonFormatter,
+        }
     },
     'filters': {
         'require_debug_true': {
@@ -282,6 +289,13 @@ LOGGING = {
             'filename': 'logs/general.log',
             'formatter': 'general_form'
         },
+        'file_json': {
+            'level': 'INFO',
+            'filters': ['require_debug_false'],
+            'class': 'logging.FileHandler',
+            'filename': 'logs/json.log',
+            'formatter': 'json_formatter'
+        },
         'file_errors': {
             'level': 'ERROR',
             'filters': ['require_debug_true'],
@@ -307,7 +321,7 @@ LOGGING = {
         'django': {
             'handlers': [
                 'console', 'console_warning',
-                'console_error', 'file_general'
+                'console_error', 'file_general', 'file_json'
             ],
             'propagate': True,
         },
