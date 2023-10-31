@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Comment, PostCategory, Post, Category, Author
+from .models import Comment, PostCategory,\
+    Post, Category, Author, MyModel
+# импортируем модель амдинки
+# (вспоминаем модуль про переопределение стандартных админ-инструментов)
+from modeltranslation.admin import TranslationAdmin
 
 
 def delete_news(modeladmin, request, queryset): # request — объект хранящий информацию о запросе
@@ -38,9 +42,28 @@ class CommentAdmin(admin.ModelAdmin):
 
 # Register your models here.
 
+# Регистрируем модели для перевода в админке
+
+class CategoryAdminTranslate(TranslationAdmin):
+    model = Category
+
+
+class PostAdminTranslate(TranslationAdmin):
+    model = Post
+
+
+class MyModelAdmin(TranslationAdmin):
+    model = MyModel
+
+
+
+# Register your models here.
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(PostCategory)
 admin.site.register(Author, AuthorAdmin)
+admin.site.register(MyModel)
+#admin.site.register(Category)
 # admin.site.unregister(Post) # разрегистрируем

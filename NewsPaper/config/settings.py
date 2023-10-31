@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 SECRET_KEY = 'django-insecure-3hj-&9n1u1piaa%54orox@#@!31cumhiq+&ay-f+#&$qz*g!=t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -40,6 +40,8 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation', # это приложение
+    # обязательно надо вписать перед админом
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,6 +77,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+
+    'news.middlewares.TimezoneMiddleware',
 ]
 
 
@@ -109,6 +113,11 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+LANGUAGES = [
+    ('en-us', 'English'),
+    ('ru', 'Russian'),
+]
 
 CACHES = {
     'default': {
@@ -152,7 +161,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
+#LANGUAGE_CODE = 'ru'
 TIME_ZONE = 'Europe/Belgrade'
 
 USE_I18N = True
@@ -166,7 +175,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 ADMINS = (
-    ('adminKO', 'oleg18.09@mail.ru'),
+    (os.getenv('ADMIN_USER'), os.getenv('EMAIL_ADMIN')),
 )
 EMAIL_HOST = 'smtp.mail.ru' # адрес сервера Яндекс-почты для всех один и тот же
 #EMAIL_HOST = 'smtp.yandex.ru'
@@ -182,6 +191,7 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 EMAIL_ADMIN = os.getenv('EMAIL_ADMIN')
 SERVER_EMAIL = os.getenv('SERVER_EMAIL')
+ADMIN_USER = os.getenv('ADMIN_USER')
 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -343,6 +353,7 @@ LOGGING = {
         },
         'django.security': {
             'handlers': ['file_security'],
+            'level': 'INFO',
             'propagate': True,
         }
     }

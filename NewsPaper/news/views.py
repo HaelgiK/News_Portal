@@ -1,15 +1,25 @@
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
-from .models import Post, Category
+from django.utils.translation import activate,\
+    get_supported_language_variant #LANGUAGE_SESSION_KEY
+from .models import Post, Category, MyModel
 from .filters import PostFilter
 from .forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext as _ # импортируем функцию для перевода
+from django.utils import timezone
+from django.shortcuts import redirect
+#  импортируем стандартный модуль для работы с часовыми поясами
+import pytz
+
 
 
 class PostList(ListView):
@@ -168,3 +178,22 @@ def unsubscribe(request, pk):
 #     category.subscribers.add(user)
 #     message = 'Вы подписались на категорию: '
 #     return render(request, 'subscribe.html', {'category': category, 'message': message})
+
+class Index(View):
+    def get(self, request):
+        curent_time = timezone.now()
+        # Translators: This message appears on the home page only
+        models = Post.objects.all()
+        # return HttpResponse(string)
+        context = {
+            'models': models,
+            'current_time': timezone.now(),
+            'timezones': pytz.common_timezones  # добавляем в контекст все доступные часовые пояса
+        }
+
+        return HttpResponse(render(request, 'index.html', context))
+
+    #  по пост-запросу будем добавлять в сессию часовой пояс, который и будет обрабатываться написанным нами ранее middleware
+    def post(self, request):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect('/')

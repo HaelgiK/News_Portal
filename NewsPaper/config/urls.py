@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    # подключаем встроенные эндопинты для работы с локализацией
+    path('i18n/', include('django.conf.urls.i18n')),
     # путь к панели администратора
     path('admin/', admin.site.urls),
     # перенаправление корневой страницы в приложение protect

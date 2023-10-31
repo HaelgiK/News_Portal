@@ -1,4 +1,5 @@
 {% extends 'flatpages/default.html' %}
+{% load i18n %}
 
 {% load custom_filters %}
 
@@ -10,8 +11,8 @@ News
 {% endblock title %}
 
 {% block content %}
-   <h1>NEWS</h1>
-    <h3> All the news for today:</h3>
+   <h1>{% trans "NEWS" %}</h1>
+    <h3> {% trans "All the news for today:" %}</h3>
     <style>
         table {
 	        border-spacing: 10px
@@ -29,15 +30,15 @@ News
     margin-bottom: 1rem; /* Отступ снизу */
    }
    </style>
-<button type="button" class="orange" name="Search" onclick="document.location.href='{% url 'search_news' %}'">Search</button>
+<button type="button" class="orange" name="Search" onclick="document.location.href='{% url 'search_news' %}'">{% trans "Search" %}</button>
 
    <hr>
    {% if news %}
        <table>
            <tr>
-               <td><h5>Title new</h5></td>
-               <td><h5>Date created</h5></td>
-               <td><h5>Article content</h5></td>
+               <td><h5>{% trans "Title new" %}</h5></td>
+               <td><h5>{% trans "Date created" %}</h5></td>
+               <td><h5>{% trans "Article content" %}</h5></td>
            </tr>
            {% for new in news %}
            <tr>
@@ -49,7 +50,7 @@ News
 
        </table>
    {% else %}
-       <h2>No news!</h2>
+       <h2>{% trans "No news!" %}</h2>
    {% endif %}
 
    {# Добавляем пагинацию на страницу #}

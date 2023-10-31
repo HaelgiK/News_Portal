@@ -114,3 +114,33 @@ django.core.exceptions.PermissionDenied
 2023-10-25 13:16:20,002 INFO autoreload Watching for file changes with StatReloader
 2023-10-25 13:16:21,919 INFO basehttp "GET /news/ HTTP/1.1" 200 4889
 2023-10-25 13:16:22,377 INFO basehttp "GET /news/ HTTP/1.1" 200 4889
+2023-10-25 15:31:58,798 INFO autoreload Watching for file changes with StatReloader
+2023-10-25 15:35:16,813 INFO autoreload C:\Users\okond\PycharmProjects\DjangoProject\NewsPaper\config\settings.py changed, reloading.
+2023-10-25 15:35:17,518 INFO autoreload Watching for file changes with StatReloader
+2023-10-25 15:35:23,161 INFO basehttp "GET /news/search/?header__icontains=&author=1&category=2&date= HTTP/1.1" 200 4161
+2023-10-25 15:35:24,280 INFO basehttp "GET /news/search/?header__icontains=&author=1&category=2&date= HTTP/1.1" 200 4161
+2023-10-25 15:42:37,924 INFO autoreload C:\Users\okond\PycharmProjects\DjangoProject\NewsPaper\config\settings.py changed, reloading.
+2023-10-25 15:42:38,659 INFO autoreload Watching for file changes with StatReloader
+2023-10-25 15:43:45,716 INFO autoreload C:\Users\okond\PycharmProjects\DjangoProject\NewsPaper\config\settings.py changed, reloading.
+2023-10-25 15:43:46,326 INFO autoreload Watching for file changes with StatReloader
+2023-10-25 15:47:51,557 INFO autoreload C:\Users\okond\PycharmProjects\DjangoProject\NewsPaper\config\settings.py changed, reloading.
+2023-10-25 15:47:52,319 INFO autoreload Watching for file changes with StatReloader
+2023-10-25 15:49:13,409 INFO autoreload C:\Users\okond\PycharmProjects\DjangoProject\NewsPaper\config\settings.py changed, reloading.
+2023-10-25 15:49:13,996 INFO autoreload Watching for file changes with StatReloader
+2023-10-25 15:49:18,451 INFO autoreload Watching for file changes with StatReloader
+2023-10-25 15:49:21,210 INFO basehttp "GET /news/search/?header__icontains=&author=1&category=5&date= HTTP/1.1" 200 3458
+2023-10-25 15:49:21,783 INFO basehttp "GET /news/search/?header__icontains=&author=1&category=5&date= HTTP/1.1" 200 3458
+2023-10-26 12:50:05,315 INFO autoreload Watching for file changes with StatReloader
+2023-10-26 12:50:35,036 INFO basehttp "GET / HTTP/1.1" 200 570
+2023-10-26 12:50:35,099 WARNING log Not Found: /favicon.ico
+2023-10-26 12:50:35,099 WARNING basehttp "GET /favicon.ico HTTP/1.1" 404 179
+2023-10-26 12:50:38,363 INFO basehttp "GET /sign/logout/ HTTP/1.1" 200 242
+2023-10-26 12:50:46,615 INFO basehttp "GET / HTTP/1.1" 302 0
+2023-10-26 12:50:46,723 INFO basehttp "GET /accounts/login/?next=/ HTTP/1.1" 200 1568
+2023-10-26 12:51:23,205 INFO basehttp "POST /accounts/login/ HTTP/1.1" 200 1714
+2023-10-26 12:52:37,386 INFO basehttp "GET /accounts/signup/?next=%2F HTTP/1.1" 200 1195
+2023-10-26 12:53:04,621 INFO basehttp "POST /accounts/signup/ HTTP/1.1" 302 0
+2023-10-26 12:53:04,637 INFO basehttp "GET /accounts/confirm-email/ HTTP/1.1" 200 498
+2023-10-26 13:13:29,449 INFO autoreload C:\Users\okond\PycharmProjects\DjangoProject\NewsPaper\config\settings.py changed, reloading.
+2023-10-26 13:13:30,179 INFO autoreload Watching for file changes with StatReloader
+2023-10-26 14:42:55,512 INFO autoreload C:\Users\okond\PycharmProjects\DjangoProject\NewsPaper\config\settings.py changed, reloading.

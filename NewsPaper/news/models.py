@@ -5,6 +5,9 @@ from django.db.models import Sum
 from django.db.models.functions import Coalesce
 from django.urls import reverse
 
+from django.utils.translation import gettext as _
+from django.utils.translation import pgettext_lazy # импортируем «ленивый» геттекст с подсказкой
+
 from django.core.cache import cache
 
 
@@ -29,7 +32,7 @@ class Author(models.Model):
 
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=100, unique=True)
+    category_name = models.CharField(max_length=100, help_text=_('category name'), unique=True)
     # blank=True - поле может быть не обязательным и null=True - может быть нулевым
     # related_name='categories' - Когда оперируем объектом User,
     # то сможем с помощью поля user.categories.all обратиться ко всем категориям, на которые подписан пользователь
@@ -43,6 +46,15 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category_name
+
+class MyModel(models.Model):
+    name = models.CharField(max_length=100)
+    kind = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='kinds',
+        verbose_name=pgettext_lazy('help text for MyModel model', 'This is the help text'),
+    )
 
 
 class Post(models.Model):
