@@ -1,3 +1,6 @@
+# Npews Portal
+
+
 **Application based on Django Framework**
 
 In this application you can create publications (news or articles), edit and delete them. You can select categories at the moment of their creation (Sports, Travel, Movies/Music, Auto, Economy)
